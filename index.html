@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text-to-Speech</title>
+    <style>
+        /* Reset some default styles */
+body, h1, textarea, button {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #e0e0e0;
+    color: #333;
+}
+
+.container {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 600px;
+    padding: 30px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+}
+
+.container:hover {
+    transform: scale(1.03);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+    font-size: 2.2em;
+    margin-bottom: 25px;
+    color: #333;
+}
+
+textarea {
+    width: calc(100% - 30px); /* Adjust to account for padding */
+    height: 150px;
+    padding: 15px;
+    border: 2px solid #dcdcdc;
+    border-radius: 10px;
+    font-size: 16px;
+    resize: vertical;
+    margin-bottom: 20px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background: #fafafa;
+}
+
+textarea:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.25);
+    outline: none;
+}
+
+button {
+    padding: 12px 24px;
+    margin: 10px;
+    border: none;
+    border-radius: 25px;
+    background-color: #007bff;
+    color: #ffffff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: translateY(1px);
+}
+
+#stop-btn {
+    background-color: #dc3545;
+}
+
+#stop-btn:hover {
+    background-color: #c82333;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+
+    textarea {
+        height: 120px;
+    }
+
+    button {
+        font-size: 14px;
+        padding: 10px 20px;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Text-to-Speech Converter</h1>
+        <textarea id="text-input" placeholder="Enter text here..."></textarea>
+        <button id="speak-btn">Speak (English)</button>
+        <button id="speak-hindi-btn">Speak (Hindi)</button>
+        <button id="stop-btn">Stop</button>
+    </div>
+    <script src="https://code.responsivevoice.org/responsivevoice.js?key=13cEQPcG"></script>
+    <script>document.addEventListener('DOMContentLoaded', () => {
+        const speakButton = document.getElementById('speak-btn');
+        const speakHindiButton = document.getElementById('speak-hindi-btn');
+        const stopButton = document.getElementById('stop-btn');
+        const textInput = document.getElementById('text-input');
+    
+        speakButton.addEventListener('click', () => {
+            const text = textInput.value;
+            if (text) {
+                responsiveVoice.speak(text, "UK English Male"); // Default English voice
+            } else {
+                alert('Please enter some text!');
+            }
+        });
+    
+        speakHindiButton.addEventListener('click', () => {
+            const text = textInput.value;
+            if (text) {
+                responsiveVoice.speak(text, "Hindi Female"); // Hindi voice
+            } else {
+                alert('Please enter some text!');
+            }
+        });
+    
+        stopButton.addEventListener('click', () => {
+            responsiveVoice.cancel();
+        });
+    });
+    </script>
+</body>
+</html>
